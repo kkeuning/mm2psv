@@ -1,8 +1,8 @@
 package main
 
-import "testing"
-import "os"
 import (
+	"testing"
+	"os"
 	"io"
 	"bytes"
 	"strings"
@@ -39,8 +39,8 @@ func TestProcessXml(t *testing.T) {
 	r,w,_ := os.Pipe()
 	os.Stdout = w
 
-
 	outC := make(chan string)
+
 	// copy the output in a separate goroutine so printing can't block indefinitely
 	go func() {
 		var buf bytes.Buffer
@@ -61,5 +61,3 @@ func TestProcessXml(t *testing.T) {
 		t.Error("Failure! Missing lungfish in test.")
 	}
 }
-
-
