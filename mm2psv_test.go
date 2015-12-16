@@ -1,11 +1,11 @@
 package main
 
 import (
-	"testing"
-	"os"
-	"io"
 	"bytes"
+	"io"
+	"os"
 	"strings"
+	"testing"
 )
 
 var testXml = `<map version="1.0.1">
@@ -36,7 +36,7 @@ var testXml = `<map version="1.0.1">
 
 func TestProcessXml(t *testing.T) {
 	orig := os.Stdout // backup of real stdout
-	r,w,_ := os.Pipe()
+	r, w, _ := os.Pipe()
 	os.Stdout = w
 
 	outC := make(chan string)
@@ -54,10 +54,10 @@ func TestProcessXml(t *testing.T) {
 	os.Stdout = orig // restore stdout
 	out := <-outC
 
-	if (strings.Count(out, "|fish|") != 10) {
+	if strings.Count(out, "|fish|") != 10 {
 		t.Error("Failure! Not enough rows.")
 	}
-	if (strings.Contains(out,"|fish|bony|lobe finned|lungfish|") == false) {
+	if strings.Contains(out, "|fish|bony|lobe finned|lungfish|") == false {
 		t.Error("Failure! Missing lungfish in test.")
 	}
 }
